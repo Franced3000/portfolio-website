@@ -3,7 +3,7 @@
 import React from "react";
 import { Resend } from "resend";
 import { validateString, getErrorMessage } from "@/lib/utils";
-import ContactFormEmail from "@/email/contact-form-email";
+import { ContactFormEmail } from "@/email/contact-form-email"; // Cambiato da default export a named export
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -29,7 +29,7 @@ export const sendEmail = async (formData: FormData) => {
       from: "Contact Form <onboarding@resend.dev>",
       to: "franc.spata@gmail.com",
       subject: "Message from contact form",
-      html: `<p><strong>Message:</strong> ${message}</p><p><strong>Sender:</strong> ${senderEmail}</p>`,
+      react: React.createElement(ContactFormEmail, { message, senderEmail }), // Assicurati che ContactFormEmail sia importato correttamente
     });
   } catch (error) {
     return {
