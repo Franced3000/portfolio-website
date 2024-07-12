@@ -6,13 +6,36 @@ export default function SubmitBtn() {
 
   const handleClick = async () => {
     setPending(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setPending(false);
+    try {
+      const form = document.querySelector("form");
+      if (!form || !(form instanceof HTMLFormElement)) {
+        throw new Error("Form element not found");
+      }
+      const formData = new FormData(form);
+      const response = await fetch("/api/send", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await response.json();
+      if (response.ok) {
+        alert("Email sent successfully!");
+      } else {
+        alert("Failed to send email: " + result.error);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert("Error sending email: " + error.message);
+      } else {
+        alert("Unknown error");
+      }
+    } finally {
+      setPending(false);
+    }
   };
 
   return (
     <button
-      type="submit"
+      type="button"
       className="group flex items-center justify-center gap-2 h-[3rem] w-[8rem] bg-gray-900 text-white rounded-full outline-none transition-all focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 dark:bg-white dark:bg-opacity-10 disabled:scale-100 disabled:bg-opacity-65"
       onClick={handleClick}
       disabled={pending}
