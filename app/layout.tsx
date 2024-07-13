@@ -24,10 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <Head>
-        <link rel="shortcut icon" href="../public/image/icon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="../public/image/aple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="../public/image/icon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="../public/image/icon-16x16.png"/>
+        <link rel="shortcut icon" href="icon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="icon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="icon-16x16.png"/>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
       </Head>
